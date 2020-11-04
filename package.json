@@ -1,0 +1,12 @@
+{
+  "name": "@mana-ui/heatmap",
+  "version": "0.1.0",
+  "description": "heatmap",
+  "main": "src/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "d3-color": "^2.0.0",
+    "d3-interpolate": "^2.0.1",
+    "lodash.throttle": "^4.1.1"
+  }
+}
