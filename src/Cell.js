@@ -8,7 +8,7 @@ const Cell = ({ d, i, mapDataToColor }) => {
   const [over, setOver] = useState(false);
   const { w, h, rows, max, min } = useContext(Context);
   const handleChange = ([min, max]) => {
-    if (i === 92) setShow(d >= min && d <= max);
+    setShow(d >= min && d <= max);
   };
   useEffect(() => observer.listen("change", handleChange), [d]);
   useEffect(() => {

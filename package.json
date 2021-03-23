@@ -1,6 +1,6 @@
 {
   "name": "@mana-ui/heatmap",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "heatmap",
   "main": "src/index.js",
   "license": "MIT",
