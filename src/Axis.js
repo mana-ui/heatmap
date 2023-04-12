@@ -20,6 +20,7 @@ const Axis = ({
     useLayoutEffect(() => {
       let g = gap;
       if (data !== dataRef.current) {
+        dataRef.current = data
         g = 1;
       }
       const visibleNodes = [],
