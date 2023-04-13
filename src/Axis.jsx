@@ -12,39 +12,36 @@ const Axis = ({
     labelMatrix,
     labelAnchor,
     format,
-    gapResolver
+    gapResolver: isOverlayying
   }) => {
     const ref = useRef();
     const [gap, setGap] = useState(1);
     const dataRef = useRef(data);
+
     useLayoutEffect(() => {
-      let g = gap;
-      if (data !== dataRef.current) {
-        dataRef.current = data
-        g = 1;
-      }
-      const visibleNodes = [],
-        { children } = ref.current;
-      for (let i = 0; i < children.length; i++) {
-        if (i % g === 0) {
-          visibleNodes.push(children[i]);
-        }
-      }
-      for (let i = 0; i < visibleNodes.length; i++) {
-        const node = visibleNodes[i];
-        const next = visibleNodes[i + 1];
-        if (next) {
-          const dim = node.getBoundingClientRect();
-          const nextDim = next.getBoundingClientRect();
-          if (gapResolver(dim, nextDim)) {
-            g += 1;
-            break;
+      let gap = 1
+      const {children} = ref.current
+
+      const isGapOK = (gap) => {
+        for (let i = 0; i < children.length; i = i + gap) {
+          const cur = children[i]
+          const next = children[i + gap]
+          if (next) {
+            const curDim = cur.getBoundingClientRect()
+            const nextDim = next.getBoundingClientRect()
+            if (isOverlayying(curDim, nextDim)) {
+              return false
+            }
           }
-        }
+        }      
+        return true
       }
-      if (g !== gap) {
-        setGap(g);
+
+      while (!isGapOK(gap)) {
+        gap += 1
       }
+
+      setGap(gap)
     });
     return (
       <>
